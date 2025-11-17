@@ -1,0 +1,530 @@
+{
+  "_meta": {
+    "description": "Comprehensive database of CLI tools with read-only vs write operations",
+    "version": "1.0.0",
+    "last_updated": "2025-01-16",
+    "research_instructions": {
+      "when_tool_not_found": "Use research workflow to discover commands",
+      "priority_order": [
+        "mcp__perplexity-ask__perplexity_ask (if available)",
+        "mcp__brave-search__brave_web_search",
+        "gemini skill (if available)",
+        "WebSearch (built-in Claude Code)"
+      ],
+      "query_template": "What are the read-only commands vs write/destructive commands for {tool}? List them separately with examples.",
+      "validation": "Always present findings to user for confirmation before applying"
+    }
+  },
+  "git": {
+    "description": "Distributed version control system",
+    "read_only": [
+      "status",
+      "log",
+      "diff",
+      "show",
+      "branch",
+      "remote",
+      "config --list",
+      "blame",
+      "reflog"
+    ],
+    "write": [
+      "commit",
+      "push",
+      "pull",
+      "add",
+      "merge",
+      "rebase",
+      "reset",
+      "checkout",
+      "tag",
+      "stash",
+      "cherry-pick"
+    ],
+    "dangerous": [
+      "push --force",
+      "push -f",
+      "reset --hard",
+      "clean -fd",
+      "filter-branch"
+    ]
+  },
+  "gcloud": {
+    "description": "Google Cloud Platform CLI",
+    "read_only": [
+      "list",
+      "describe",
+      "get-iam-policy",
+      "get",
+      "show"
+    ],
+    "write": [
+      "create",
+      "delete",
+      "update",
+      "deploy",
+      "set",
+      "add-iam-policy-binding",
+      "remove-iam-policy-binding",
+      "run"
+    ],
+    "dangerous": [
+      "delete",
+      "projects delete",
+      "remove-iam-policy-binding"
+    ],
+    "notes": "Commands follow pattern: gcloud <service> <resource> <verb>"
+  },
+  "aws": {
+    "description": "Amazon Web Services CLI",
+    "read_only": [
+      "describe-*",
+      "list-*",
+      "get-*"
+    ],
+    "write": [
+      "create-*",
+      "delete-*",
+      "update-*",
+      "put-*",
+      "register-*",
+      "deregister-*"
+    ],
+    "dangerous": [
+      "delete-*",
+      "terminate-*"
+    ],
+    "notes": "Verb-based naming: describe/list/get for read, create/delete/update for write"
+  },
+  "kubectl": {
+    "description": "Kubernetes command-line tool",
+    "read_only": [
+      "get",
+      "describe",
+      "logs",
+      "top",
+      "explain"
+    ],
+    "write": [
+      "create",
+      "delete",
+      "apply",
+      "patch",
+      "edit",
+      "scale",
+      "rollout",
+      "exec",
+      "port-forward"
+    ],
+    "dangerous": [
+      "delete",
+      "drain",
+      "cordon"
+    ],
+    "rbac_mapping": {
+      "read": ["get", "list", "watch"],
+      "write": ["create", "update", "patch", "delete"]
+    }
+  },
+  "docker": {
+    "description": "Container platform CLI",
+    "read_only": [
+      "ps",
+      "images",
+      "logs",
+      "inspect",
+      "stats",
+      "version",
+      "info",
+      "history"
+    ],
+    "write": [
+      "run",
+      "create",
+      "start",
+      "stop",
+      "restart",
+      "rm",
+      "rmi",
+      "build",
+      "pull",
+      "push",
+      "tag",
+      "commit"
+    ],
+    "dangerous": [
+      "rm -f",
+      "rmi -f",
+      "system prune",
+      "volume rm"
+    ]
+  },
+  "npm": {
+    "description": "Node.js package manager",
+    "read_only": [
+      "list",
+      "ls",
+      "view",
+      "search",
+      "audit",
+      "outdated",
+      "config list",
+      "doctor"
+    ],
+    "write": [
+      "install",
+      "i",
+      "update",
+      "publish",
+      "audit fix",
+      "uninstall",
+      "ci"
+    ],
+    "dangerous": [
+      "publish",
+      "unpublish"
+    ]
+  },
+  "pip": {
+    "description": "Python package installer",
+    "read_only": [
+      "list",
+      "show",
+      "freeze",
+      "check",
+      "search",
+      "debug"
+    ],
+    "write": [
+      "install",
+      "uninstall",
+      "download",
+      "wheel"
+    ],
+    "dangerous": [
+      "uninstall -y"
+    ]
+  },
+  "maven": {
+    "description": "Java build automation tool",
+    "read_only": [
+      "compile",
+      "test",
+      "package",
+      "dependency:tree",
+      "dependency:list",
+      "help:*",
+      "versions:display-dependency-updates"
+    ],
+    "write": [
+      "install",
+      "deploy"
+    ],
+    "dangerous": [
+      "deploy"
+    ],
+    "notes": "compile/test/package only write to target/ directory"
+  },
+  "gradle": {
+    "description": "Build automation system",
+    "read_only": [
+      "tasks",
+      "dependencies",
+      "dependencyInsight",
+      "properties",
+      "-m",
+      "--dry-run",
+      "projects"
+    ],
+    "write": [
+      "build",
+      "assemble",
+      "clean",
+      "test",
+      "publish",
+      "--write-locks"
+    ],
+    "dangerous": [
+      "publish"
+    ]
+  },
+  "terraform": {
+    "description": "Infrastructure as code tool",
+    "read_only": [
+      "plan",
+      "show",
+      "validate",
+      "state list",
+      "state show",
+      "output",
+      "version",
+      "providers"
+    ],
+    "write": [
+      "apply",
+      "destroy",
+      "init",
+      "import",
+      "state mv",
+      "state push"
+    ],
+    "dangerous": [
+      "destroy",
+      "apply -auto-approve",
+      "destroy -auto-approve"
+    ]
+  },
+  "cargo": {
+    "description": "Rust package manager",
+    "read_only": [
+      "check",
+      "test",
+      "clippy",
+      "search",
+      "tree",
+      "metadata"
+    ],
+    "write": [
+      "build",
+      "run",
+      "clean",
+      "publish",
+      "install",
+      "update"
+    ],
+    "dangerous": [
+      "publish",
+      "yank"
+    ]
+  },
+  "go": {
+    "description": "Go programming language toolchain",
+    "read_only": [
+      "list",
+      "version",
+      "env",
+      "doc",
+      "fmt -n"
+    ],
+    "write": [
+      "build",
+      "run",
+      "install",
+      "get",
+      "mod tidy",
+      "mod download",
+      "clean",
+      "generate"
+    ],
+    "dangerous": [
+      "clean -modcache"
+    ]
+  },
+  "helm": {
+    "description": "Kubernetes package manager",
+    "read_only": [
+      "list",
+      "get",
+      "status",
+      "history",
+      "search",
+      "show",
+      "version"
+    ],
+    "write": [
+      "install",
+      "upgrade",
+      "uninstall",
+      "rollback",
+      "create",
+      "package"
+    ],
+    "dangerous": [
+      "uninstall",
+      "delete"
+    ]
+  },
+  "ansible": {
+    "description": "IT automation platform",
+    "read_only": [
+      "inventory --list",
+      "config dump",
+      "doc",
+      "--check",
+      "--diff"
+    ],
+    "write": [
+      "playbook",
+      "vault encrypt",
+      "vault decrypt",
+      "galaxy install"
+    ],
+    "dangerous": [
+      "playbook (without --check)"
+    ],
+    "notes": "--check flag makes playbook read-only (dry-run)"
+  },
+  "pulumi": {
+    "description": "Infrastructure as code",
+    "read_only": [
+      "preview",
+      "stack ls",
+      "stack output",
+      "config get",
+      "about"
+    ],
+    "write": [
+      "up",
+      "destroy",
+      "refresh",
+      "import",
+      "stack init",
+      "config set"
+    ],
+    "dangerous": [
+      "destroy",
+      "up --yes"
+    ]
+  },
+  "az": {
+    "description": "Azure CLI",
+    "read_only": [
+      "list",
+      "show",
+      "get"
+    ],
+    "write": [
+      "create",
+      "delete",
+      "update",
+      "set"
+    ],
+    "dangerous": [
+      "delete",
+      "group delete"
+    ],
+    "notes": "Similar pattern to gcloud: az <service> <resource> <verb>"
+  },
+  "claude": {
+    "description": "Claude Code CLI",
+    "commands": [
+      "claude",
+      "-p",
+      "--print",
+      "-c",
+      "--continue",
+      "update",
+      "mcp"
+    ],
+    "slash_commands": [
+      "/help",
+      "/config",
+      "/status",
+      "/permissions",
+      "/allowed-tools",
+      "/mcp",
+      "/privacy-settings",
+      "/cost",
+      "/usage",
+      "/memory",
+      "/export",
+      "/vim"
+    ],
+    "flags": [
+      "--allowedTools",
+      "--disallowedTools",
+      "--add-dir",
+      "--output-format",
+      "--agents"
+    ],
+    "dangerous_flags": [
+      "--dangerously-skip-permissions"
+    ]
+  },
+  "gemini": {
+    "description": "Gemini CLI",
+    "slash_commands": [
+      "/help",
+      "/chat",
+      "/settings",
+      "/mcp",
+      "/memory",
+      "/tools",
+      "/stats",
+      "/theme",
+      "/auth",
+      "/quit",
+      "/exit",
+      "/vim",
+      "/init",
+      "/bug",
+      "/compress",
+      "/copy",
+      "/directory",
+      "/editor",
+      "/extensions",
+      "/restore",
+      "/privacy",
+      "/about"
+    ],
+    "special_syntax": {
+      "@": "File injection",
+      "!": "Shell mode toggle"
+    },
+    "modes": [
+      "-p (non-interactive print mode)"
+    ]
+  },
+  "yarn": {
+    "description": "JavaScript package manager",
+    "read_only": [
+      "list",
+      "info",
+      "why",
+      "outdated",
+      "check"
+    ],
+    "write": [
+      "add",
+      "remove",
+      "upgrade",
+      "install",
+      "publish"
+    ],
+    "dangerous": [
+      "publish"
+    ]
+  },
+  "bundle": {
+    "description": "Ruby dependency manager",
+    "read_only": [
+      "list",
+      "show",
+      "outdated",
+      "check"
+    ],
+    "write": [
+      "install",
+      "update",
+      "add",
+      "remove"
+    ],
+    "dangerous": []
+  },
+  "composer": {
+    "description": "PHP dependency manager",
+    "read_only": [
+      "show",
+      "search",
+      "outdated",
+      "validate"
+    ],
+    "write": [
+      "install",
+      "update",
+      "require",
+      "remove"
+    ],
+    "dangerous": []
+  }
+}

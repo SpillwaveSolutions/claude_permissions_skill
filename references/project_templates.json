@@ -1,0 +1,391 @@
+{
+  "_meta": {
+    "description": "Permission templates for different project types",
+    "version": "1.0.0",
+    "usage": "Automatically applied when project type is detected"
+  },
+  "rust": {
+    "description": "Rust project with Cargo",
+    "file_patterns": {
+      "allow": [
+        "Read",
+        "Write(src/**.rs)",
+        "Write(tests/**.rs)",
+        "Write(benches/**.rs)",
+        "Write(examples/**.rs)",
+        "Write(Cargo.toml)",
+        "Write(**.md)",
+        "Edit(**.rs)",
+        "Edit(Cargo.toml)"
+      ],
+      "deny": [
+        "Write(target/**)",
+        "Write(Cargo.lock)"
+      ]
+    },
+    "commands": {
+      "allow": [
+        "Bash(cargo build)",
+        "Bash(cargo test)",
+        "Bash(cargo check)",
+        "Bash(cargo run)",
+        "Bash(cargo clean)",
+        "Bash(cargo clippy)",
+        "Bash(cargo fmt)",
+        "Bash(cargo tree)"
+      ],
+      "deny": [
+        "Bash(cargo publish)"
+      ]
+    }
+  },
+  "java-maven": {
+    "description": "Java project with Maven",
+    "file_patterns": {
+      "allow": [
+        "Read",
+        "Write(src/**.java)",
+        "Write(pom.xml)",
+        "Write(**.md)",
+        "Write(**.xml)",
+        "Edit(**.java)",
+        "Edit(pom.xml)"
+      ],
+      "deny": [
+        "Write(target/**)",
+        "Write(.m2/**)"
+      ]
+    },
+    "commands": {
+      "allow": [
+        "Bash(mvn compile)",
+        "Bash(mvn test)",
+        "Bash(mvn package)",
+        "Bash(mvn clean)",
+        "Bash(mvn verify)",
+        "Bash(mvn dependency:tree)"
+      ],
+      "deny": [
+        "Bash(mvn deploy)",
+        "Bash(mvn install)"
+      ]
+    }
+  },
+  "java-gradle": {
+    "description": "Java project with Gradle",
+    "file_patterns": {
+      "allow": [
+        "Read",
+        "Write(src/**.java)",
+        "Write(src/**.kt)",
+        "Write(build.gradle)",
+        "Write(build.gradle.kts)",
+        "Write(settings.gradle)",
+        "Write(settings.gradle.kts)",
+        "Write(**.md)",
+        "Edit(**.java)",
+        "Edit(**.kt)",
+        "Edit(build.gradle*)",
+        "Edit(settings.gradle*)"
+      ],
+      "deny": [
+        "Write(build/**)",
+        "Write(.gradle/**)"
+      ]
+    },
+    "commands": {
+      "allow": [
+        "Bash(gradle build)",
+        "Bash(gradle test)",
+        "Bash(gradle clean)",
+        "Bash(gradle tasks)",
+        "Bash(gradle dependencies)",
+        "Bash(./gradlew build)",
+        "Bash(./gradlew test)",
+        "Bash(./gradlew clean)"
+      ],
+      "deny": [
+        "Bash(gradle publish)",
+        "Bash(./gradlew publish)"
+      ]
+    }
+  },
+  "typescript": {
+    "description": "TypeScript project with npm",
+    "file_patterns": {
+      "allow": [
+        "Read",
+        "Write(src/**.ts)",
+        "Write(src/**.tsx)",
+        "Write(**.json)",
+        "Write(**.md)",
+        "Edit(**.ts)",
+        "Edit(**.tsx)",
+        "Edit(package.json)",
+        "Edit(tsconfig.json)"
+      ],
+      "deny": [
+        "Write(node_modules/**)",
+        "Write(dist/**)",
+        "Write(build/**)"
+      ]
+    },
+    "commands": {
+      "allow": [
+        "Bash(npm install)",
+        "Bash(npm test)",
+        "Bash(npm run *)",
+        "Bash(npm list)",
+        "Bash(npm audit)",
+        "Bash(tsc)",
+        "Bash(tsc --noEmit)"
+      ],
+      "deny": [
+        "Bash(npm publish)"
+      ]
+    }
+  },
+  "javascript": {
+    "description": "JavaScript project with npm",
+    "file_patterns": {
+      "allow": [
+        "Read",
+        "Write(src/**.js)",
+        "Write(src/**.jsx)",
+        "Write(**.json)",
+        "Write(**.md)",
+        "Edit(**.js)",
+        "Edit(**.jsx)",
+        "Edit(package.json)"
+      ],
+      "deny": [
+        "Write(node_modules/**)",
+        "Write(dist/**)",
+        "Write(build/**)"
+      ]
+    },
+    "commands": {
+      "allow": [
+        "Bash(npm install)",
+        "Bash(npm test)",
+        "Bash(npm run *)",
+        "Bash(npm list)",
+        "Bash(npm audit)"
+      ],
+      "deny": [
+        "Bash(npm publish)"
+      ]
+    }
+  },
+  "python": {
+    "description": "Python project",
+    "file_patterns": {
+      "allow": [
+        "Read",
+        "Write(**.py)",
+        "Write(pyproject.toml)",
+        "Write(setup.py)",
+        "Write(requirements.txt)",
+        "Write(**.md)",
+        "Edit(**.py)",
+        "Edit(pyproject.toml)",
+        "Edit(requirements.txt)"
+      ],
+      "deny": [
+        "Write(__pycache__/**)",
+        "Write(**.pyc)",
+        "Write(dist/**)",
+        "Write(build/**)",
+        "Write(.eggs/**)"
+      ]
+    },
+    "commands": {
+      "allow": [
+        "Bash(pip list)",
+        "Bash(pip show *)",
+        "Bash(pip freeze)",
+        "Bash(python -m pytest)",
+        "Bash(pytest)",
+        "Bash(python -m unittest)",
+        "Bash(python **.py)"
+      ],
+      "deny": [
+        "Bash(pip install)",
+        "Bash(pip uninstall)"
+      ]
+    }
+  },
+  "go": {
+    "description": "Go project",
+    "file_patterns": {
+      "allow": [
+        "Read",
+        "Write(**.go)",
+        "Write(go.mod)",
+        "Write(go.sum)",
+        "Write(**.md)",
+        "Edit(**.go)",
+        "Edit(go.mod)"
+      ],
+      "deny": []
+    },
+    "commands": {
+      "allow": [
+        "Bash(go build)",
+        "Bash(go test)",
+        "Bash(go run *)",
+        "Bash(go fmt)",
+        "Bash(go vet)",
+        "Bash(go list)",
+        "Bash(go mod tidy)",
+        "Bash(go mod download)"
+      ],
+      "deny": [
+        "Bash(go install)",
+        "Bash(go clean -modcache)"
+      ]
+    }
+  },
+  "ruby": {
+    "description": "Ruby project with Bundler",
+    "file_patterns": {
+      "allow": [
+        "Read",
+        "Write(**.rb)",
+        "Write(Gemfile)",
+        "Write(**.md)",
+        "Edit(**.rb)",
+        "Edit(Gemfile)"
+      ],
+      "deny": [
+        "Write(Gemfile.lock)"
+      ]
+    },
+    "commands": {
+      "allow": [
+        "Bash(bundle install)",
+        "Bash(bundle exec *)",
+        "Bash(bundle list)",
+        "Bash(ruby **.rb)",
+        "Bash(rspec)",
+        "Bash(rake)"
+      ],
+      "deny": []
+    }
+  },
+  "php": {
+    "description": "PHP project with Composer",
+    "file_patterns": {
+      "allow": [
+        "Read",
+        "Write(**.php)",
+        "Write(composer.json)",
+        "Write(**.md)",
+        "Edit(**.php)",
+        "Edit(composer.json)"
+      ],
+      "deny": [
+        "Write(vendor/**)",
+        "Write(composer.lock)"
+      ]
+    },
+    "commands": {
+      "allow": [
+        "Bash(composer install)",
+        "Bash(composer update)",
+        "Bash(composer show)",
+        "Bash(php **.php)",
+        "Bash(phpunit)"
+      ],
+      "deny": []
+    }
+  },
+  "csharp": {
+    "description": "C# .NET project",
+    "file_patterns": {
+      "allow": [
+        "Read",
+        "Write(**.cs)",
+        "Write(**.csproj)",
+        "Write(**.sln)",
+        "Write(**.md)",
+        "Edit(**.cs)",
+        "Edit(**.csproj)"
+      ],
+      "deny": [
+        "Write(bin/**)",
+        "Write(obj/**)"
+      ]
+    },
+    "commands": {
+      "allow": [
+        "Bash(dotnet build)",
+        "Bash(dotnet test)",
+        "Bash(dotnet run)",
+        "Bash(dotnet clean)",
+        "Bash(dotnet restore)"
+      ],
+      "deny": [
+        "Bash(dotnet publish)"
+      ]
+    }
+  },
+  "cpp": {
+    "description": "C++ project",
+    "file_patterns": {
+      "allow": [
+        "Read",
+        "Write(**.cpp)",
+        "Write(**.cc)",
+        "Write(**.cxx)",
+        "Write(**.hpp)",
+        "Write(**.h)",
+        "Write(CMakeLists.txt)",
+        "Write(Makefile)",
+        "Write(**.md)",
+        "Edit(**.cpp)",
+        "Edit(**.h)",
+        "Edit(CMakeLists.txt)"
+      ],
+      "deny": [
+        "Write(build/**)"
+      ]
+    },
+    "commands": {
+      "allow": [
+        "Bash(cmake .)",
+        "Bash(make)",
+        "Bash(make test)",
+        "Bash(make clean)"
+      ],
+      "deny": [
+        "Bash(make install)"
+      ]
+    }
+  },
+  "swift": {
+    "description": "Swift project",
+    "file_patterns": {
+      "allow": [
+        "Read",
+        "Write(**.swift)",
+        "Write(Package.swift)",
+        "Write(**.md)",
+        "Edit(**.swift)",
+        "Edit(Package.swift)"
+      ],
+      "deny": [
+        "Write(.build/**)"
+      ]
+    },
+    "commands": {
+      "allow": [
+        "Bash(swift build)",
+        "Bash(swift test)",
+        "Bash(swift run)",
+        "Bash(swift package *)"
+      ],
+      "deny": []
+    }
+  }
+}

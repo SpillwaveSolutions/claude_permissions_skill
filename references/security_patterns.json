@@ -1,0 +1,161 @@
+{
+  "_meta": {
+    "description": "Universal security deny rules to prevent accidental exposure or destruction",
+    "version": "1.0.0",
+    "usage": "Always apply these deny rules when adding any permissions"
+  },
+  "sensitive_files": {
+    "description": "Files that should never be readable to prevent credential/secret exposure",
+    "patterns": [
+      "Read(.env)",
+      "Read(.env.*)",
+      "Read(*.key)",
+      "Read(*.pem)",
+      "Read(*.p12)",
+      "Read(*.pfx)",
+      "Read(.aws/**)",
+      "Read(.ssh/**)",
+      "Read(secrets/**)",
+      "Read(credentials/**)",
+      "Read(**/credentials.json)",
+      "Read(**/service-account.json)",
+      "Read(**/.npmrc)",
+      "Read(**/.pypirc)",
+      "Read(**/id_rsa)",
+      "Read(**/id_rsa.pub)",
+      "Read(**/.netrc)"
+    ]
+  },
+  "sensitive_writes": {
+    "description": "Files that should never be writable to prevent corruption of critical configs",
+    "patterns": [
+      "Write(.env)",
+      "Write(.env.*)",
+      "Write(production.*)",
+      "Write(prod.*)",
+      "Write(*.key)",
+      "Write(*.pem)",
+      "Write(.git/**)",
+      "Write(.aws/credentials)",
+      "Write(.ssh/id_rsa)"
+    ]
+  },
+  "dangerous_commands": {
+    "description": "Commands that can cause irreversible damage or security issues",
+    "patterns": [
+      "Bash(rm -rf *)",
+      "Bash(rm -rf /)",
+      "Bash(rm *)",
+      "Bash(sudo rm *)",
+      "Bash(sudo *)",
+      "Bash(chmod 777 *)",
+      "Bash(chmod *)",
+      "Bash(chown *)",
+      "Bash(dd *)",
+      "Bash(mkfs *)",
+      "Bash(fdisk *)",
+      "Bash(parted *)",
+      "Bash(curl * | bash)",
+      "Bash(wget * | bash)",
+      "Bash(curl * | sh)",
+      "Bash(wget * | sh)"
+    ]
+  },
+  "force_operations": {
+    "description": "Force flags that bypass safety checks",
+    "patterns": [
+      "Bash(git push * --force)",
+      "Bash(git push * -f)",
+      "Bash(git reset --hard *)",
+      "Bash(git clean -fd *)",
+      "Bash(docker rm -f *)",
+      "Bash(docker rmi -f *)",
+      "Bash(kubectl delete * --force)",
+      "Bash(terraform apply -auto-approve)",
+      "Bash(terraform destroy -auto-approve)",
+      "Bash(pulumi up --yes)"
+    ]
+  },
+  "production_deployments": {
+    "description": "Commands that deploy to production or public registries",
+    "patterns": [
+      "Bash(npm publish)",
+      "Bash(cargo publish)",
+      "Bash(mvn deploy)",
+      "Bash(gradle publish)",
+      "Bash(pip upload)",
+      "Bash(docker push * prod*)",
+      "Bash(docker push * production*)",
+      "Bash(gcloud * deploy * --project=*prod*)",
+      "Bash(aws * deploy * --env=prod*)",
+      "Bash(kubectl apply * --namespace=prod*)",
+      "Bash(helm install * production)",
+      "Bash(terraform apply * -var-file=prod*)"
+    ]
+  },
+  "database_destructive": {
+    "description": "Database commands that can destroy data",
+    "patterns": [
+      "Bash(* DROP DATABASE *)",
+      "Bash(* DROP TABLE *)",
+      "Bash(* DELETE FROM *)",
+      "Bash(* TRUNCATE *)",
+      "Bash(psql * -c 'DROP *')",
+      "Bash(mysql * -e 'DROP *')"
+    ]
+  },
+  "recommended_deny_set": {
+    "description": "Standard deny rules to apply for most projects",
+    "minimal": [
+      "Read(.env*)",
+      "Read(*.key)",
+      "Read(*.pem)",
+      "Bash(rm *)",
+      "Bash(sudo *)"
+    ],
+    "standard": [
+      "Read(.env*)",
+      "Read(*.key)",
+      "Read(*.pem)",
+      "Read(.aws/**)",
+      "Read(.ssh/**)",
+      "Read(secrets/**)",
+      "Write(.env*)",
+      "Write(production.*)",
+      "Bash(rm *)",
+      "Bash(sudo *)",
+      "Bash(chmod *)",
+      "Bash(curl * | bash)",
+      "Bash(wget * | bash)",
+      "Bash(git push * --force)"
+    ],
+    "strict": [
+      "Read(.env*)",
+      "Read(*.key)",
+      "Read(*.pem)",
+      "Read(*.p12)",
+      "Read(.aws/**)",
+      "Read(.ssh/**)",
+      "Read(secrets/**)",
+      "Read(credentials/**)",
+      "Write(.env*)",
+      "Write(production.*)",
+      "Write(*.key)",
+      "Write(*.pem)",
+      "Write(.git/**)",
+      "Bash(rm *)",
+      "Bash(sudo *)",
+      "Bash(chmod *)",
+      "Bash(chown *)",
+      "Bash(dd *)",
+      "Bash(mkfs *)",
+      "Bash(curl * | bash)",
+      "Bash(wget * | bash)",
+      "Bash(git push * --force)",
+      "Bash(git reset --hard *)",
+      "Bash(npm publish)",
+      "Bash(mvn deploy)",
+      "Bash(terraform destroy *)"
+    ]
+  }
+}

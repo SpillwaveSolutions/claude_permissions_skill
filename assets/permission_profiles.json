@@ -1,0 +1,248 @@
+{
+  "_meta": {
+    "description": "Pre-built permission profiles for common use cases",
+    "version": "1.0.0",
+    "usage": "Apply with: claude-permissions --profile <name>"
+  },
+  "read-only": {
+    "description": "Minimal permissions for read-only analysis and exploration",
+    "allowedTools": [
+      "Read"
+    ],
+    "deny": [
+      "Write",
+      "Edit",
+      "Bash",
+      "WebFetch",
+      "WebSearch"
+    ],
+    "use_cases": [
+      "Code review",
+      "Security audit",
+      "Learning from existing code",
+      "Documentation review"
+    ]
+  },
+  "development": {
+    "description": "Full development permissions with safety guards",
+    "allowedTools": [
+      "Read",
+      "Write(src/**)",
+      "Write(test/**)",
+      "Write(tests/**)",
+      "Write(docs/**)",
+      "Write(**.md)",
+      "Edit(src/**)",
+      "Edit(test/**)",
+      "Edit(tests/**)",
+      "Edit(**.md)",
+      "Bash(git status)",
+      "Bash(git log)",
+      "Bash(git diff)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git branch *)",
+      "Bash(npm install)",
+      "Bash(npm test)",
+      "Bash(npm run *)",
+      "Bash(pip install *)",
+      "Bash(pip list)",
+      "Bash(pytest *)",
+      "Bash(mvn test)",
+      "Bash(mvn compile)",
+      "Bash(gradle test)",
+      "Bash(gradle build)",
+      "Bash(cargo test)",
+      "Bash(cargo build)",
+      "Bash(go test)",
+      "Bash(go build)"
+    ],
+    "deny": [
+      "Read(.env*)",
+      "Read(*.key)",
+      "Read(*.pem)",
+      "Read(.aws/**)",
+      "Read(.ssh/**)",
+      "Write(.env*)",
+      "Write(production.*)",
+      "Write(.git/**)",
+      "Bash(rm *)",
+      "Bash(sudo *)",
+      "Bash(git push * --force)",
+      "Bash(npm publish)",
+      "Bash(mvn deploy)",
+      "Bash(cargo publish)",
+      "Bash(terraform destroy *)"
+    ],
+    "use_cases": [
+      "Active development",
+      "Feature implementation",
+      "Bug fixing",
+      "Unit testing",
+      "Local experimentation"
+    ]
+  },
+  "ci-cd": {
+    "description": "Automated CI/CD pipeline permissions",
+    "allowedTools": [
+      "Read",
+      "Bash(git status)",
+      "Bash(git log)",
+      "Bash(git diff)",
+      "Bash(npm ci)",
+      "Bash(npm test)",
+      "Bash(npm run build)",
+      "Bash(pip install -r requirements.txt)",
+      "Bash(pytest)",
+      "Bash(mvn clean verify)",
+      "Bash(mvn test)",
+      "Bash(gradle clean build)",
+      "Bash(gradle test)",
+      "Bash(cargo test)",
+      "Bash(cargo build --release)",
+      "Bash(go test ./...)",
+      "Bash(go build)",
+      "Bash(docker build *)",
+      "Bash(docker tag *)"
+    ],
+    "deny": [
+      "Write",
+      "Edit",
+      "Read(.env*)",
+      "Read(*.key)",
+      "Bash(git push *)",
+      "Bash(npm publish)",
+      "Bash(docker push *)",
+      "Bash(mvn deploy)",
+      "Bash(terraform apply *)",
+      "Bash(kubectl apply *)"
+    ],
+    "use_cases": [
+      "Continuous integration",
+      "Automated testing",
+      "Build verification",
+      "Code quality checks"
+    ]
+  },
+  "production": {
+    "description": "Minimal permissions for production environments",
+    "allowedTools": [
+      "Read(logs/**)",
+      "Read(config/**)",
+      "Bash(git status)",
+      "Bash(git log)",
+      "Bash(docker ps)",
+      "Bash(docker logs *)",
+      "Bash(kubectl get *)",
+      "Bash(kubectl describe *)",
+      "Bash(kubectl logs *)"
+    ],
+    "deny": [
+      "Write",
+      "Edit",
+      "Read(.env*)",
+      "Read(*.key)",
+      "Read(.aws/**)",
+      "Bash(git *)",
+      "Bash(docker *)",
+      "Bash(kubectl delete *)",
+      "Bash(kubectl apply *)",
+      "Bash(npm *)",
+      "Bash(pip *)",
+      "Bash(terraform *)"
+    ],
+    "use_cases": [
+      "Production monitoring",
+      "Log analysis",
+      "Troubleshooting",
+      "Status checks"
+    ]
+  },
+  "documentation": {
+    "description": "Documentation writing and updating",
+    "allowedTools": [
+      "Read",
+      "Write(docs/**)",
+      "Write(**.md)",
+      "Write(**.rst)",
+      "Edit(docs/**)",
+      "Edit(**.md)",
+      "Edit(**.rst)",
+      "WebFetch",
+      "WebSearch"
+    ],
+    "deny": [
+      "Write(src/**)",
+      "Write(test/**)",
+      "Bash(git push *)",
+      "Bash(npm *)",
+      "Bash(pip *)",
+      "Bash(mvn *)"
+    ],
+    "use_cases": [
+      "Writing documentation",
+      "Updating README files",
+      "Creating guides",
+      "Documentation maintenance"
+    ]
+  },
+  "code-review": {
+    "description": "Code review and analysis",
+    "allowedTools": [
+      "Read",
+      "Bash(git status)",
+      "Bash(git log)",
+      "Bash(git diff *)",
+      "Bash(git show *)",
+      "Bash(git blame *)"
+    ],
+    "deny": [
+      "Write",
+      "Edit",
+      "Read(.env*)",
+      "Read(*.key)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(npm *)",
+      "Bash(pip *)"
+    ],
+    "use_cases": [
+      "Pull request review",
+      "Code quality analysis",
+      "Security review",
+      "Architecture review"
+    ]
+  },
+  "testing": {
+    "description": "Testing and quality assurance",
+    "allowedTools": [
+      "Read",
+      "Write(test/**)",
+      "Write(tests/**)",
+      "Edit(test/**)",
+      "Edit(tests/**)",
+      "Bash(npm test)",
+      "Bash(npm run test:*)",
+      "Bash(pytest *)",
+      "Bash(python -m pytest *)",
+      "Bash(mvn test)",
+      "Bash(gradle test)",
+      "Bash(cargo test)",
+      "Bash(go test *)"
+    ],
+    "deny": [
+      "Write(src/**)",
+      "Read(.env*)",
+      "Bash(npm publish)",
+      "Bash(mvn deploy)",
+      "Bash(git push *)"
+    ],
+    "use_cases": [
+      "Writing tests",
+      "Running test suites",
+      "Test-driven development",
+      "Quality assurance"
+    ]
+  }
+}
