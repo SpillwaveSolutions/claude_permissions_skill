@@ -1,47 +1,70 @@
-# Claude Permissions Manager 🔐
+# Claude Permissions Manager
 
 > Intelligent, proactive permission management for Claude Code that eliminates configuration friction.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Claude-Code-blue.svg)](https://claude.ai/code)
 [![Version](https://img.shields.io/badge/version-1.0.0-green.svg)](https://github.com/SpillwaveSolutions/claude_permissions_skill)
+[![Skilz Marketplace](https://img.shields.io/badge/Skilz-Marketplace-purple.svg)](https://skillzwave.ai/skill/SpillwaveSolutions__claude_permissions_skill__claude-permissions__SKILL/)
 
-Tired of manually configuring Claude Code permissions? This skill transforms permission management from tedious JSON editing into simple, natural language conversations. Just say what you want to enable, and the skill handles the rest—automatically, safely, and intelligently.
+Tired of manually configuring Claude Code permissions? This skill transforms permission management from tedious JSON editing into simple, natural language conversations. Just say what you want to enable, and the skill handles the rest - automatically, safely, and intelligently.
 
-## ✨ Why This Skill?
+## Why This Skill?
 
 **Before:**
-```
-❌ Manually edit ~/.claude/settings.json
-❌ Look up permission syntax
-❌ Remember which commands are safe
-❌ Forget to deny sensitive files
-❌ Get stuck on unknown tools
-```
+- Manually edit ~/.claude/settings.json
+- Look up permission syntax
+- Remember which commands are safe
+- Forget to deny sensitive files
+- Get stuck on unknown tools
 
 **After:**
+- "enable git" - Auto-adds safe git commands
+- "make markdown files editable" - Instant configuration
+- "this is a Rust project" - Complete setup in seconds
+- "enable terraform" - Automatic research and configuration
+- Safety rules applied automatically
+
+---
+
+## Installation
+
+### Option 1: Skilz Universal Installer (Recommended)
+
+The easiest way to install this skill is via the [Skilz Universal Installer](https://github.com/AgenDev-ai/skilz):
+
+```bash
+# Install skilz CLI (if not already installed)
+npm install -g skilz
+
+# Install this skill
+skilz install SpillwaveSolutions_claude_permissions_skill/claude-permissions
 ```
-✅ "enable git" → Auto-adds safe git commands
-✅ "make markdown files editable" → Instant configuration
-✅ "this is a Rust project" → Complete setup in seconds
-✅ "enable terraform" → Automatic research & configuration
-✅ Safety rules applied automatically
+
+**Or use npx without global installation:**
+
+```bash
+npx skilz install SpillwaveSolutions_claude_permissions_skill/claude-permissions
 ```
 
-## 🚀 Quick Start
+View this skill on the marketplace: [skillzwave.ai/skill/SpillwaveSolutions__claude_permissions_skill__claude-permissions__SKILL/](https://skillzwave.ai/skill/SpillwaveSolutions__claude_permissions_skill__claude-permissions__SKILL/)
 
-### Installation
+### Option 2: Git Clone (Manual)
 
-1. **Clone this repository into your Claude Code skills directory:**
+Clone this repository directly into your Claude Code skills directory:
 
 ```bash
 cd ~/.claude/skills
-git clone git@github.com:SpillwaveSolutions/claude_permissions_skill.git claude-permissions
+git clone https://github.com/SpillwaveSolutions/claude_permissions_skill.git claude-permissions
 ```
 
-2. **That's it!** The skill is now available to Claude Code.
+### Verify Installation
 
-### Your First Permission
+After installation, the skill is immediately available to Claude Code. No restart required.
+
+---
+
+## Quick Start
 
 Start Claude Code and try:
 
@@ -50,11 +73,11 @@ User: "enable git read commands"
 ```
 
 Claude will automatically:
-- ✅ Add read-only git permissions (status, log, diff, show, branch)
-- ✅ Apply safety deny rules (no `--force` operations)
-- ✅ Create a backup of your settings
-- ✅ Validate the configuration
-- ✅ Confirm what was added
+- Add read-only git permissions (status, log, diff, show, branch)
+- Apply safety deny rules (no `--force` operations)
+- Create a backup of your settings
+- Validate the configuration
+- Confirm what was added
 
 ### More Examples
 
@@ -75,9 +98,11 @@ Claude will automatically:
 "apply development profile"
 ```
 
-## 🎯 Key Features
+---
 
-### 1️⃣ Natural Language Understanding
+## Key Features
+
+### 1. Natural Language Understanding
 
 Stop editing JSON. Just describe what you want:
 
@@ -89,7 +114,7 @@ Stop editing JSON. Just describe what you want:
 | "this is a TypeScript project" | Complete TypeScript + npm setup |
 | "enable kubectl read commands" | Adds kubernetes read-only operations |
 
-### 2️⃣ Built-in Knowledge for 17 CLI Tools
+### 2. Built-in Knowledge for 17 CLI Tools
 
 Pre-configured with read vs write operations for:
 
@@ -125,57 +150,57 @@ Pre-configured with read vs write operations for:
 - `gemini` - Gemini CLI
 
 Each tool has carefully curated lists of:
-- ✅ **Read-only operations** (safe, recommended)
-- ⚠️ **Write operations** (with appropriate safeguards)
-- 🚫 **Dangerous operations** (auto-denied)
+- **Read-only operations** (safe, recommended)
+- **Write operations** (with appropriate safeguards)
+- **Dangerous operations** (auto-denied)
 
-### 3️⃣ Auto-Detection for 12+ Languages
+### 3. Auto-Detection for 12+ Languages
 
 Automatically detects project type and applies appropriate templates:
 
 ```
-Cargo.toml              → Rust project
-pom.xml                 → Java Maven
-build.gradle            → Java Gradle
-package.json + tsconfig → TypeScript
-package.json (only)     → JavaScript
-pyproject.toml          → Python
-go.mod                  → Go
-Gemfile                 → Ruby
-composer.json           → PHP
-*.csproj                → C#
-CMakeLists.txt          → C++
-Package.swift           → Swift
+Cargo.toml              -> Rust project
+pom.xml                 -> Java Maven
+build.gradle            -> Java Gradle
+package.json + tsconfig -> TypeScript
+package.json (only)     -> JavaScript
+pyproject.toml          -> Python
+go.mod                  -> Go
+Gemfile                 -> Ruby
+composer.json           -> PHP
+*.csproj                -> C#
+CMakeLists.txt          -> C++
+Package.swift           -> Swift
 ```
 
 Each template includes:
-- 📝 File editing patterns (`.rs`, `.java`, `.ts`, etc.)
-- 🔨 Build tool commands (safe operations only)
-- 🛡️ Deny rules for build artifacts and sensitive files
+- File editing patterns (`.rs`, `.java`, `.ts`, etc.)
+- Build tool commands (safe operations only)
+- Deny rules for build artifacts and sensitive files
 
-### 4️⃣ Research Mode for Unknown Tools
+### 4. Research Mode for Unknown Tools
 
 Encountered a tool not in the database? No problem!
 
 **Automatic research workflow:**
-1. ✅ Check built-in database (`cli_commands.json`)
-2. 🔍 Research using (in priority order):
+1. Check built-in database (`cli_commands.json`)
+2. Research using (in priority order):
    - Perplexity MCP (if available)
    - Brave Search MCP
    - Gemini skill (if available)
    - Built-in WebSearch
-3. 📊 Parse results for read vs write operations
-4. 👤 Present findings to user for confirmation
-5. ✅ Apply permissions
-6. 💾 Optionally cache for future use
+3. Parse results for read vs write operations
+4. Present findings to user for confirmation
+5. Apply permissions
+6. Optionally cache for future use
 
 **Example with Terraform (unknown tool):**
 ```
 User: "enable terraform read commands"
 
 Claude:
-  📋 Checking database... not found
-  🔍 Researching via Perplexity...
+  Checking database... not found
+  Researching via Perplexity...
 
   Found these read-only commands:
   - terraform plan (preview changes)
@@ -193,16 +218,16 @@ Claude:
 User: y
 
 Claude:
-  ✅ Added 5 terraform read commands
-  🛡️ Denied terraform apply, destroy
-  💾 Backup created: ~/.claude/settings.20250116_143022.backup
+  Added 5 terraform read commands
+  Denied terraform apply, destroy
+  Backup created: ~/.claude/settings.20250116_143022.backup
 ```
 
-### 5️⃣ Safety-First by Design
+### 5. Safety-First by Design
 
 **Every permission change includes automatic deny rules for:**
 
-🔒 **Sensitive Files:**
+**Sensitive Files:**
 ```
 .env, .env.*           - Environment variables
 *.key, *.pem           - Private keys & certificates
@@ -211,7 +236,7 @@ secrets/**             - Secrets directories
 credentials/**         - Credential files
 ```
 
-⚠️ **Dangerous Commands:**
+**Dangerous Commands:**
 ```
 rm *, rm -rf           - File deletion
 sudo *                 - Privilege escalation
@@ -220,7 +245,7 @@ dd, mkfs               - Disk operations
 curl * | bash          - Pipe to shell execution
 ```
 
-🚫 **Force Operations:**
+**Force Operations:**
 ```
 git push --force       - Force push
 git reset --hard       - Hard reset
@@ -228,7 +253,7 @@ docker rm -f           - Force container removal
 terraform destroy      - Infrastructure destruction
 ```
 
-📦 **Production Deployments:**
+**Production Deployments:**
 ```
 npm publish            - NPM registry
 mvn deploy             - Maven repository
@@ -238,18 +263,18 @@ docker push *prod*     - Production images
 
 **Three security levels available:**
 - `minimal` (5 rules) - Basic protection
-- `standard` (13 rules) - Recommended default ⭐
+- `standard` (13 rules) - Recommended default
 - `strict` (25 rules) - Maximum security
 
-### 6️⃣ Configuration Backup & Validation
+### 6. Configuration Backup & Validation
 
 Before **every** change:
-1. 💾 Creates timestamped backup (`settings.YYYYMMDD_HHMMSS.backup`)
-2. ✅ Validates permission syntax
-3. 🔍 Checks for conflicts (allow vs deny)
-4. ⚠️ Warns about security issues
-5. ✅ Applies changes safely
-6. 📊 Reports what was changed
+1. Creates timestamped backup (`settings.YYYYMMDD_HHMMSS.backup`)
+2. Validates permission syntax
+3. Checks for conflicts (allow vs deny)
+4. Warns about security issues
+5. Applies changes safely
+6. Reports what was changed
 
 **Easy rollback:**
 ```bash
@@ -260,7 +285,9 @@ ls -la ~/.claude/settings.*.backup
 cp ~/.claude/settings.20250116_143022.backup ~/.claude/settings.json
 ```
 
-## 📋 Permission Profiles
+---
+
+## Permission Profiles
 
 Pre-built profiles for common workflows:
 
@@ -322,7 +349,7 @@ Pre-built profiles for common workflows:
 
 **All 7 profiles:**
 - `read-only` - Code review, audit
-- `development` - Active development ⭐
+- `development` - Active development (recommended)
 - `ci-cd` - Automated testing
 - `production` - Monitoring only
 - `documentation` - Docs writing
@@ -336,7 +363,9 @@ User: "use read-only profile"
 User: "set up CI/CD permissions"
 ```
 
-## 🛠️ Advanced Usage
+---
+
+## Advanced Usage
 
 ### Standalone Python Scripts
 
@@ -404,22 +433,24 @@ Support for directory-specific permissions:
 
 ```
 User: "make files in src/ editable"
-→ Adds: Write(src/**), Edit(src/**)
+-> Adds: Write(src/**), Edit(src/**)
 
 User: "allow editing docs folder"
-→ Adds: Write(docs/**), Edit(docs/**)
+-> Adds: Write(docs/**), Edit(docs/**)
 
 User: "enable TypeScript in src only"
-→ Adds: Write(src/**.ts), Write(src/**.tsx)
+-> Adds: Write(src/**.ts), Write(src/**.tsx)
 ```
 
-## 📚 Architecture
+---
+
+## Architecture
 
 ### Directory Structure
 
 ```
 claude-permissions/
-├── SKILL.md                          # Main skill instructions (862 lines)
+├── SKILL.md                          # Main skill instructions
 ├── README.md                         # This file
 ├── LICENSE                           # MIT License
 ├── .gitignore                        # Git ignore patterns
@@ -433,6 +464,16 @@ claude-permissions/
 │   ├── cli_commands.json             # 17 CLI tools database
 │   ├── project_templates.json        # 12 language templates
 │   └── security_patterns.json        # Universal safety rules
+│
+├── guides/                           # Workflow guides
+│   └── workflows/                    # Step-by-step workflows
+│       ├── cli-tool-workflow.md
+│       ├── file-pattern-workflow.md
+│       ├── project-setup-workflow.md
+│       ├── profile-application-workflow.md
+│       ├── validation-workflow.md
+│       ├── backup-restore-workflow.md
+│       └── research-workflow.md
 │
 └── assets/                           # Pre-built configurations
     └── permission_profiles.json      # 7 permission profiles
@@ -480,17 +521,19 @@ graph TD
 
 ### Data Flow
 
-1. **User Input** → Natural language request
-2. **Intent Detection** → Parse what user wants
-3. **Knowledge Lookup** → Check built-in database OR research online
-4. **Permission Building** → Construct allow/deny rules
-5. **Safety Application** → Add security deny rules
-6. **Validation** → Check syntax and conflicts
-7. **Backup** → Create timestamped backup
-8. **Application** → Write to settings file
-9. **Confirmation** → Report changes to user
+1. **User Input** - Natural language request
+2. **Intent Detection** - Parse what user wants
+3. **Knowledge Lookup** - Check built-in database OR research online
+4. **Permission Building** - Construct allow/deny rules
+5. **Safety Application** - Add security deny rules
+6. **Validation** - Check syntax and conflicts
+7. **Backup** - Create timestamped backup
+8. **Application** - Write to settings file
+9. **Confirmation** - Report changes to user
 
-## 🔧 Customization & Extension
+---
+
+## Customization & Extension
 
 ### Adding New CLI Tools
 
@@ -597,7 +640,9 @@ Edit `references/security_patterns.json`:
 }
 ```
 
-## 🐛 Troubleshooting
+---
+
+## Troubleshooting
 
 ### Permissions Not Taking Effect
 
@@ -704,7 +749,9 @@ python3 scripts/validate_config.py ~/.claude/settings.json -v
    ```
 3. Review and consolidate permission rules
 
-## 🤝 Contributing
+---
+
+## Contributing
 
 We welcome contributions! Here's how you can help:
 
@@ -757,7 +804,9 @@ Support a new language? Add a template:
 - Improve error messages
 - Translate to other languages
 
-## 📊 Statistics
+---
+
+## Statistics
 
 - **Total Lines of Code:** ~2,800
 - **CLI Tools Supported:** 17
@@ -766,23 +815,33 @@ Support a new language? Add a template:
 - **Security Patterns:** 80+
 - **Example Scenarios:** 15+
 
-## 📜 License
+---
+
+## License
 
 MIT License - see [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+---
+
+## Acknowledgments
 
 - [Claude Code](https://claude.ai/code) by Anthropic
 - [Claude Code Community](https://discord.gg/claude-code)
+- [Skilz Marketplace](https://skillzwave.ai) - Universal skill installer
 - All contributors and users
 
-## 📞 Support
+---
+
+## Support
 
 - **Issues:** [GitHub Issues](https://github.com/SpillwaveSolutions/claude_permissions_skill/issues)
 - **Discussions:** [GitHub Discussions](https://github.com/SpillwaveSolutions/claude_permissions_skill/discussions)
 - **Discord:** [Claude Code Community](https://discord.gg/claude-code)
+- **Marketplace:** [Skilz Listing](https://skillzwave.ai/skill/SpillwaveSolutions__claude_permissions_skill__claude-permissions__SKILL/)
 
-## 🗺️ Roadmap
+---
+
+## Roadmap
 
 ### Version 1.1
 - [ ] More CLI tools (kubectl plugins, cloud CLIs)
@@ -802,18 +861,12 @@ MIT License - see [LICENSE](LICENSE) file for details.
 - [ ] Permission templates marketplace
 - [ ] Enterprise policy manager
 
-## ⭐ Star History
-
-If this skill saves you time, please star the repository!
-
-[![Star History Chart](https://api.star-history.com/svg?repos=SpillwaveSolutions/claude_permissions_skill&type=Date)](https://star-history.com/#SpillwaveSolutions/claude_permissions_skill&Date)
-
 ---
 
 <div align="center">
 
-**Made with ❤️ by the Claude Code Community**
+**Made with care by the Claude Code Community**
 
-[Report Bug](https://github.com/SpillwaveSolutions/claude_permissions_skill/issues) · [Request Feature](https://github.com/SpillwaveSolutions/claude_permissions_skill/issues) · [Documentation](https://github.com/SpillwaveSolutions/claude_permissions_skill/wiki)
+[Report Bug](https://github.com/SpillwaveSolutions/claude_permissions_skill/issues) | [Request Feature](https://github.com/SpillwaveSolutions/claude_permissions_skill/issues) | [Documentation](https://github.com/SpillwaveSolutions/claude_permissions_skill/wiki)
 
 </div>
